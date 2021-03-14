@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 코딩 앙마님꺼 클론 코딩
+https://www.youtube.com/watch?v=Ujjdn2wMIew&t=190s
 
-## Getting Started
+### Install 
+```
+1. npx create-next-app
+## https://react.semantic-ui.com/usage 시맨틱 설치
+2. npm install semantic-ui-react semantic-ui-css
+3. _app.js에 import 'semantic-ui-css/semantic.min.css'
+4. npm i axios
 
-First, run the development server:
+```
+### 환경변수 설정
+```
+//node js
 
-```bash
-npm run dev
-# or
-yarn dev
+process.env.변수명
+
+//browser
+
+process.env.NEXT_PUBLIC_변수명
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Pre-rendering(사전 렌더링)
+- 기본적으로 모든 페이지 pre-render
+- 사전에 HTML 파일들을 만든다는 의미
+- 퍼포먼스 향상, SEO
+- Static Generation: 정적 생성
+- Server-side Rendering: 서버 사이드 렌더링
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Static Generation: 정적 생성(미리 만들어 두는 경우)
+- 마케팅 페이지
+- 블로그 게시물
+- 제품 목록
+- 도움말, 문서
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Server-side Rendering
+- 항상 최신 상태 유지
+- 관리자 페이지
+- 분석 차트

@@ -1,65 +1,75 @@
+import Axios from 'axios';
 import Head from 'next/head'
+import { useEffect, useState } from 'react';
+import { Divider, Header, Loader } from 'semantic-ui-react';
 import styles from '../styles/Home.module.css'
+import ItemList from '../src/component/ItemList';
 
-export default function Home() {
+export default function Home({list}) {
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>HOME | 코딩앙마</title>
+        <meta name='description' content='코딩 앙마 홈입니다.'></meta>
       </Head>
+        <>
+          <Header as='h3' style={{paddingTop: 40}}>
+            베스트 상품
+          </Header>
+          <Divider />
+          <ItemList list={list.slice(0, 9)} />
+          <Header as='h3' style={{paddingTop: 40}}>
+            신상품
+          </Header>
+          <Divider />
+          <ItemList list={list.slice(9)} />
+        </>
+      
+      {/* create-next-app create-next-app으로 설치하면
+      <br />
+      1. 컴파일과 번들링이 자동으로 된다.(webpack과 babel)
+      <br />
+      2. 자동 리프레쉬 기능으로 수행하면 화면에 바로 반영합니다.
+      <br />
+      3. 서버사이드 렌더링이 지원됩니다.
+      <br />
+      4. 스태틱 파일을 지원합니다. */}
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      {/*
+      Next js 모든 페이지 사전 렌더링(Pre-rendering)
+      더 좋은 퍼포먼스
+      검색엔진 최적화(SEO)
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+      1. 정적 생성
+      2. Server Side Rendering (SSR, Dynamic Rendering)
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+      차이점은 언제 html 파일을 생성하는가
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+      [정적 생성]
+      - 프로젝트가 빌드하는 시점에 html파일들이 생성
+      - 모든 요청에 재사용
+      - 퍼포먼스 이유로, 넥스트 js는 정적 생성을 권고
+      - 정적 생성된 페이지들은 CDN에 캐시
+      - getStaticProps / getStaticPaths
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      [서버사이드 렌더링]은 매 요청마다 html을 생성
+      - 항상 최신 상태 유지
+      - getServerSideProps
+      */}
     </div>
-  )
+  );
+}
+
+export async function getStaticProps(context){
+  const apiUrl = process.env.apiUrl;
+  const res = await Axios.get(apiUrl);
+  const data = res.data;
+
+  return {
+    props: {
+      list: data,
+      name: process.env.name,
+    }
+  }
 }
